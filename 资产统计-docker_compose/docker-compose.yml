@@ -1,0 +1,21 @@
+services:
+  asset-management:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asset-management
+    ports:
+      - "5000:5000"
+    volumes:
+      - asset-data:/app/data
+      - asset-backup:/app/backup
+    environment:
+      - DATA_DIR=/app/data
+      - BACKUP_DIR=/app/backup
+    restart: unless-stopped
+
+volumes:
+  asset-data:
+    driver: local
+  asset-backup:
+    driver: local
